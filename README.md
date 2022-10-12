@@ -7,7 +7,6 @@ Backend часть приложения по поиску Фильмов
 ## Ссылка на проект:
 * [Проект: Movies](https://github.com/dubyninpavel/movies-explorer-api)
 
-
 ## Используемые технологии
 1. Node.js.
 2. Express.
@@ -15,6 +14,9 @@ Backend часть приложения по поиску Фильмов
 ## Данные сервера
 IP: 178.154.231.254
 Backend: https://api.project.movies.search.nomoredomains.icu
+
+## Ссылка на pull requests
+* [pull requests](https://github.com/dubyninpavel/movies-explorer-api/pulls)
 
 ## Директории
 `/config` — папка с кофигурационными файлами
