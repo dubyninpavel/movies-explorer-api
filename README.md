@@ -13,7 +13,7 @@ Backend часть приложения по поиску Фильмов
 2. Express.
 
 ## Данные сервера
-IP: 178.154.223.100
+IP: 178.154.231.254
 Backend: https://api.project.movies.search.nomoredomains.icu
 
 ## Директории
