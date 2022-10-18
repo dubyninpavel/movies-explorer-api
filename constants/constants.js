@@ -10,6 +10,7 @@ const NOT_FOUND_CARD_MESSAGE = 'Карточка по указанному id н
 const VALIDATION_ERROR = 'ValidationError';
 const TYPE_ERROR = 'TypeError';
 const CAST_ERROR = 'CastError';
+const URL_NOT_FOUND = 'Текущий url не найден';
 
 const LOG_OUT_MESSAGE = 'Вы вышли из аккаунта';
 const DELETED_DATA = 'Данные удалены';
@@ -28,6 +29,7 @@ module.exports = {
   VALIDATION_ERROR,
   TYPE_ERROR,
   CAST_ERROR,
+  URL_NOT_FOUND,
   LOG_OUT_MESSAGE,
   DELETED_DATA,
   INCORRECT_URL,

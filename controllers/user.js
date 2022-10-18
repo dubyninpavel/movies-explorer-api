@@ -12,7 +12,6 @@ const {
   NOT_FOUND_ERROR_MESSAGE,
   INCORRECT_DATA_MESSAGE,
   VALIDATION_ERROR,
-  TYPE_ERROR,
   LOG_OUT_MESSAGE,
 } = require('../constants/constants');
 
@@ -46,6 +45,9 @@ const loginUser = (req, res, next) => {
   User.findOne({ email })
     .select('+password')
     .then((user) => {
+      if (!user) {
+        throw new UnauthorizedError(INCORRECT_DATA_MESSAGE);
+      }
       bcrypt.compare(password, user.password)
         .then((isUserValid) => {
           if (isUserValid) {
@@ -70,9 +72,6 @@ const loginUser = (req, res, next) => {
         });
     })
     .catch((err) => {
-      if (err.name === TYPE_ERROR) {
-        next(new UnauthorizedError(INCORRECT_DATA_MESSAGE));
-      }
       next(err);
     });
 };

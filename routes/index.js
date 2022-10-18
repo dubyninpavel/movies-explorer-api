@@ -5,6 +5,7 @@ const movieRoutes = require('./movies');
 const auth = require('../middlewares/auth');
 const { validateCreateUser, validateLoginUser } = require('../validator/validator');
 const NotFoundError = require('../middlewares/errors/notFoundError');
+const { URL_NOT_FOUND } = require('../constants/constants');
 
 routes.post('/signin', validateLoginUser, loginUser);
 routes.post('/signup', validateCreateUser, createUser);
@@ -17,7 +18,7 @@ routes.use('/users', userRoutes);
 routes.use('/movies', movieRoutes);
 
 routes.all('*', (req, res, next) => {
-  next(new NotFoundError('Текущий url не найден'));
+  next(new NotFoundError(URL_NOT_FOUND));
 });
 
 module.exports = routes;

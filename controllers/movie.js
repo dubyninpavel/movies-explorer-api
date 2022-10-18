@@ -11,8 +11,9 @@ const {
   DELETED_DATA,
 } = require('../constants/constants');
 
-const getAllMovies = (req, res, next) => {
-  Movie.find({})
+const getMyMovies = (req, res, next) => {
+  const id = req.user._id;
+  Movie.find({ owner: id })
     .then((cards) => {
       res.send({ data: cards });
     })
@@ -22,34 +23,8 @@ const getAllMovies = (req, res, next) => {
 };
 
 const createMovie = (req, res, next) => {
-  const {
-    country,
-    director,
-    duration,
-    year,
-    description,
-    image,
-    trailerLink,
-    thumbnail,
-    movieId,
-    nameRU,
-    nameEN,
-  } = req.body;
   const owner = req.user._id;
-  Movie.create({
-    country,
-    director,
-    duration,
-    year,
-    description,
-    image,
-    trailerLink,
-    thumbnail,
-    owner,
-    movieId,
-    nameRU,
-    nameEN,
-  })
+  Movie.create({ ...req.body, owner })
     .then((newMovie) => {
       res.send({ data: newMovie });
     })
@@ -90,4 +65,4 @@ const deleteMovie = (req, res, next) => {
     });
 };
 
-module.exports = { getAllMovies, createMovie, deleteMovie };
+module.exports = { getMyMovies, createMovie, deleteMovie };
