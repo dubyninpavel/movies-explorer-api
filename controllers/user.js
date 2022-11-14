@@ -60,12 +60,7 @@ const loginUser = (req, res, next) => {
                 expiresIn: '7d',
               },
             );
-            res.cookie('jwt', token, {
-              maxAge: 3600000,
-              httpOnly: true,
-              sameSite: true,
-            });
-            res.send({ data: user.hiddenPassword() });
+            res.send({ data: user.hiddenPassword(), token });
           } else {
             next(new UnauthorizedError(INCORRECT_DATA_MESSAGE));
           }
