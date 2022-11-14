@@ -19,11 +19,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(helmet());
 
-const corsOptions = {
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(requestLogger);
 
 app.use(apiLimiter);
