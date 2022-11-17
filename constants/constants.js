@@ -3,7 +3,7 @@ const UNAUTHORIZED_ERROR_MESSAGE = 'Необходимо авторизиров�
 const BAD_REQUEST_ERROR_MESSAGE = 'Переданы некорректные данные';
 const CONFLICT_ERROR_MESSAGE = 'Пользователь с таким email уже существует';
 const NOT_FOUND_ERROR_MESSAGE = 'Ваш профиль не найден';
-const INCORRECT_DATA_MESSAGE = 'Неправльный email или пароль';
+const INCORRECT_DATA_MESSAGE = 'Неправильный email или пароль';
 const FORBIDDEN_ERROR_MESSAGE = 'У вас нет прав на удаление этой карточки';
 const NOT_FOUND_CARD_MESSAGE = 'Карточка по указанному id не найдена';
 
