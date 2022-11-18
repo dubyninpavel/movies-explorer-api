@@ -18,6 +18,7 @@ const userSchema = new mongoose.Schema({
       message: INCORRECT_EMAIL,
     },
   },
+
   password: {
     type: String,
     required: true,

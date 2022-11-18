@@ -89,33 +89,42 @@ const getMyUserData = (req, res, next) => {
     });
 };
 
-const updateDataUser = (req, res, next) => {
+const findUser = (req, res, next) => {
   const { name, email } = req.body;
+  User.findByIdAndUpdate(
+    { _id: req.user._id },
+    { $set: { name, email } },
+    {
+      returnDocument: 'after',
+      runValidators: true,
+    },
+  )
+    .then((user) => {
+      if (!user) {
+        throw new NotFoundError(NOT_FOUND_ERROR_MESSAGE);
+      }
+      res.send({ data: user });
+    })
+    .catch((err) => {
+      if (err.name === VALIDATION_ERROR) {
+        next(new BadRequestError(BAD_REQUEST_ERROR_MESSAGE));
+      }
+      next(err);
+    });
+};
+
+const updateDataUser = (req, res, next) => {
+  const { email } = req.body;
   User.findOne({ email })
     .then((isUser) => {
       if (isUser) {
-        next(new ConflictError(CONFLICT_ERROR_MESSAGE));
+        if (isUser.id === req.user._id) {
+          findUser(req, res, next);
+        } else {
+          next(new ConflictError(CONFLICT_ERROR_MESSAGE));
+        }
       } else {
-        User.findByIdAndUpdate(
-          { _id: req.user._id },
-          { $set: { name, email } },
-          {
-            returnDocument: 'after',
-            runValidators: true,
-          },
-        )
-          .then((user) => {
-            if (!user) {
-              throw new NotFoundError(NOT_FOUND_ERROR_MESSAGE);
-            }
-            res.send({ data: user });
-          })
-          .catch((err) => {
-            if (err.name === VALIDATION_ERROR) {
-              next(new BadRequestError(BAD_REQUEST_ERROR_MESSAGE));
-            }
-            next(err);
-          });
+        findUser(req, res, next);
       }
     })
     .catch((err) => {
